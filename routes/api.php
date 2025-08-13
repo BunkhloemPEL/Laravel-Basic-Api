@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\BlogCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\TestApiController;
@@ -20,7 +21,9 @@ Route::post(uri: '/auth/login', action: [AuthController::class, 'login'])->name(
 Route::group(['middleware'=>'auth:sanctum'],function() {
     Route::get(uri: '/profile', action: [AuthController::class, 'profile'])->name(name: 'profile');
     Route::get(uri: '/auth/logout', action: [AuthController::class, 'logout'])->name(name:'logout');
+    Route::apiResource(name: '/category', controller: BlogCategoryController::class);
 });
 
+Route::get(uri: '/category', action: [BlogCategoryController::class, 'index'])->name(name:'category');
 
 
